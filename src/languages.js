@@ -45,3 +45,5 @@ export const languages = [
         color: "#F9F4DA",
     },
 ]
+
+export default languages

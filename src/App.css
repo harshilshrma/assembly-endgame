@@ -23,14 +23,30 @@ header>p {
   margin-block: 30px;
 }
 
-.game-status>h3{
+.game-status>h3 {
   font-size: 1.25rem;
   font-weight: 500;
   margin: 1px;
 }
 
-.game-status>p{
+.game-status>p {
   font-size: 1rem;
   font-weight: 500;
   margin: 1px;
+}
+
+.languages-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 350px;
+  gap: 4.5px;
+}
+
+.lang-tag {
+  border-radius: 3px;
+  padding: 4.5px;
+  font-size: 0.75rem;
+  font-weight: 700;
 }

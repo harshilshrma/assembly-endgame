@@ -1,6 +1,18 @@
 import './App.css'
+import languages from './languages.js'
 
 function App() {
+
+  const languageElements = languages.map(lang => {
+    const spanStyles = {
+      backgroundColor: lang.backgroundColor,
+      color: lang.color
+    };
+
+    return (
+      <span key={lang.name} style={spanStyles} className="lang-tag">{lang.name}</span>
+    )
+  })
 
   return (
     <main>
@@ -15,7 +27,7 @@ function App() {
       </section>
 
       <section className="languages-list">
-        
+        {languageElements}
       </section>
     </main>
   )
