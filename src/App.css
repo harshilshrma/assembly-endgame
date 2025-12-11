@@ -1,0 +1,36 @@
+header {
+  text-align: center;
+}
+
+header>h1 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #F9F4DA;
+}
+
+header>p {
+  font-size: 0.875rem;
+  max-width: 350px;
+  color: #8E8E8E;
+}
+
+.game-status {
+  border-radius: 4px;
+  padding: 8px 10px;
+  background-color: #BA2A2A;
+  text-align: center;
+  color: #F9F4DA;
+  margin-block: 30px;
+}
+
+.game-status>h3{
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin: 1px;
+}
+
+.game-status>p{
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 1px;
+}
