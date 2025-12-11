@@ -4,23 +4,30 @@ import languages from './languages.js'
 
 function App() {
   const [currentWord, setCurrentWord] = useState('harshil')
-
+  const alphabets = "qwertyuiopasdfghjklzxcvbnm"
+  
   const languageElements = languages.map(lang => {
     const spanStyles = {
       backgroundColor: lang.backgroundColor,
       color: lang.color
     };
-
+    
     return (
       <span key={lang.name} style={spanStyles} className="lang-tag">{lang.name}</span>
     )
   })
-
+  
   const letterElements = currentWord.split("").map((letter, index) => {
     return (
       <span key={index} className="letter">{letter.toUpperCase()}</span>
     )
   });
+  
+  const keyboardElements = alphabets.split("").map((letter, index) => {
+    return (
+      <button key={index} className="keyboard-letters">{letter.toUpperCase()}</button>
+    )
+  })
 
   return (
     <main>
@@ -40,6 +47,10 @@ function App() {
 
       <section className="word">
         {letterElements}
+      </section>
+
+      <section className="keyboard">
+        {keyboardElements}
       </section>
     </main>
   )
