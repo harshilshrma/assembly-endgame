@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { clsx } from 'clsx'
 import './App.css'
 import languages from './languages.js'
 
@@ -25,8 +26,18 @@ function App() {
   });
 
   const keyboardElements = alphabets.split("").map(letter => {
+    const isGuessed = guessedLetters.includes(letter)
+    const isCorrect = isGuessed && currentWord.includes(letter)
+    const isWrong = isGuessed && !currentWord.includes(letter)
+
+    const className = clsx({
+      correct: isCorrect,
+      wrong: isWrong,
+      keyboardButtons: true
+    })
+
     return (
-      <button key={letter} className="keyboard-buttons" onClick={() => handleLetterClick(letter)}>{letter.toUpperCase()}</button>
+      <button key={letter} className={className} onClick={() => handleLetterClick(letter)}>{letter.toUpperCase()}</button>
     )
   })
 

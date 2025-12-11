@@ -93,7 +93,7 @@ header>p {
   margin-bottom: 20px;
 }
 
-.keyboard-buttons {
+.keyboardButtons {
   height: 40px;
   width: 40px;
   border-radius: 4px;
@@ -103,6 +103,14 @@ header>p {
   cursor: pointer;
   background-color: #FCBA29;
   color: black;
+}
+
+button.correct {
+  background-color: #10A95B;
+}
+
+button.wrong {
+  background-color: #EC5D49;
 }
 
 .new-game {
