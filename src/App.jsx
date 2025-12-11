@@ -4,30 +4,37 @@ import languages from './languages.js'
 
 function App() {
   const [currentWord, setCurrentWord] = useState('harshil')
+  const [guessedLetters, setGuessedLetters] = useState([])
   const alphabets = "qwertyuiopasdfghjklzxcvbnm"
-  
+
   const languageElements = languages.map(lang => {
     const spanStyles = {
       backgroundColor: lang.backgroundColor,
       color: lang.color
     };
-    
+
     return (
       <span key={lang.name} style={spanStyles} className="lang-tag">{lang.name}</span>
     )
   })
-  
+
   const letterElements = currentWord.split("").map((letter, index) => {
     return (
       <span key={index} className="letter">{letter.toUpperCase()}</span>
     )
   });
-  
-  const keyboardElements = alphabets.split("").map((letter, index) => {
+
+  const keyboardElements = alphabets.split("").map(letter => {
     return (
-      <button key={index} className="keyboard-letters">{letter.toUpperCase()}</button>
+      <button key={letter} className="keyboard-buttons" onClick={() => handleLetterClick(letter)}>{letter.toUpperCase()}</button>
     )
   })
+
+  function handleLetterClick(letter) {
+    setGuessedLetters(prevLetters => {
+      return prevLetters.includes(letter) ? prevLetters : [...prevLetters, letter]
+    })
+  }
 
   return (
     <main>
@@ -52,6 +59,8 @@ function App() {
       <section className="keyboard">
         {keyboardElements}
       </section>
+
+      <button className="new-game">New Game</button>
     </main>
   )
 }
