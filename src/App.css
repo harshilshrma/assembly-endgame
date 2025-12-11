@@ -42,11 +42,30 @@ header>p {
   justify-content: center;
   max-width: 350px;
   gap: 4.5px;
+  margin-bottom: 36px;
 }
 
 .lang-tag {
   border-radius: 3px;
   padding: 4.5px;
   font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.word {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+  justify-content: center;
+}
+
+.letter {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background-color: #323232;
+  border-bottom: 1px solid #F9F4DA;
+  padding: 6px;
+  font-size: 1.125rem;
   font-weight: 700;
 }

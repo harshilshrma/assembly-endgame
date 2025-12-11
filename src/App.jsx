@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import './App.css'
 import languages from './languages.js'
 
 function App() {
+  const [currentWord, setCurrentWord] = useState('harshil')
 
   const languageElements = languages.map(lang => {
     const spanStyles = {
@@ -13,6 +15,12 @@ function App() {
       <span key={lang.name} style={spanStyles} className="lang-tag">{lang.name}</span>
     )
   })
+
+  const letterElements = currentWord.split("").map((letter, index) => {
+    return (
+      <span key={index} className="letter">{letter.toUpperCase()}</span>
+    )
+  });
 
   return (
     <main>
@@ -28,6 +36,10 @@ function App() {
 
       <section className="languages-list">
         {languageElements}
+      </section>
+
+      <section className="word">
+        {letterElements}
       </section>
     </main>
   )
