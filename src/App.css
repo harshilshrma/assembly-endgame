@@ -113,6 +113,14 @@ button.wrong {
   background-color: #EC5D49;
 }
 
+span.show {
+  display: block;
+}
+
+span.hide {
+  display: none;
+}
+
 .new-game {
   background-color: #11B5E5;
   border: 1px solid #D7D7D7;
@@ -125,6 +133,4 @@ button.wrong {
   cursor: pointer;
 }
 
-@media (max-width: 600px) {
-
-}
+@media (max-width: 600px) {}

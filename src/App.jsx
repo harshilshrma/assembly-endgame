@@ -4,8 +4,14 @@ import './App.css'
 import languages from './languages.js'
 
 function App() {
+  // State values
   const [currentWord, setCurrentWord] = useState('harshil')
   const [guessedLetters, setGuessedLetters] = useState([])
+
+  // Derived values
+  const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
+
+  // Static values
   const alphabets = "qwertyuiopasdfghjklzxcvbnm"
 
   const languageElements = languages.map(lang => {
@@ -21,7 +27,7 @@ function App() {
 
   const letterElements = currentWord.split("").map((letter, index) => {
     return (
-      <span key={index} className="letter">{letter.toUpperCase()}</span>
+      <span key={index} className="letter">{guessedLetters.includes(letter) ? letter.toUpperCase() : ""}</span>
     )
   });
 
