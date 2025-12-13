@@ -139,10 +139,13 @@ function App() {
 
   return (
     <>
-      {isGameWon && <Confetti />}
+      {isGameWon && <Confetti recycle={false} numberOfPieces={1000} />}
       <main>
         <header>
-          <h1>Assembly Endgame</h1>
+          <div className="heading">
+            <h1>Assembly Endgame </h1>
+            <a target="_blank" href="https://github.com/harshilshrma/assembly-endgame" className="github-link">GitHub</a>
+          </div>
           <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
         </header>
 
