@@ -34,6 +34,7 @@ header>p {
   padding: 8px 10px;
   min-height: 60px;
   width: 100%;
+  max-width: 350px;
   color: #F9F4DA;
   margin: 10px 0px 40px 0px;
   text-align: center;

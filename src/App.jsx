@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { clsx } from 'clsx'
 import './App.css'
 import languages from './languages.js'
+import Confetti from 'react-confetti'
 
 function App() {
   // State values
@@ -68,45 +69,58 @@ function App() {
     lost: isGameLost
   })
 
+  function renderGameStatus() {
+    if (!isGameOver) {
+      return null;
+    }
+
+    if (isGameWon) {
+      return (
+        <>
+          <h3>You won!</h3>
+          <p>Well done! 🎉</p>
+        </>
+      )
+    }
+
+    if (isGameLost) {
+      return (
+        <>
+          <h3>Game over!</h3>
+          <p>You lose! Better start learning Assembly 😭</p>
+        </>
+      )
+    }
+  }
+
   return (
-    <main>
-      <header>
-        <h1>Assembly Endgame</h1>
-        <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
-      </header>
+    <>
+      {isGameWon && <Confetti />}
+      <main>
+        <header>
+          <h1>Assembly Endgame</h1>
+          <p>Guess the word in under 8 attempts to keep the programming world safe from Assembly!</p>
+        </header>
 
-      <section className={gameStatusClass}>
-        {
-          isGameOver ? (
-            isGameWon ? (
-              <>
-                <h3>You won!</h3>
-                <p>Well done! 🎉</p>
-              </>
-            ) : (
-              <>
-                <h3>Game over!</h3>
-                <p>You lose! Better start learning Assembly 😭</p>
-              </>
-            )
-          ) : null
-        }
-      </section>
+        <section className={gameStatusClass}>
+          {renderGameStatus()}
+        </section >
 
-      <section className="languages-list">
-        {languageElements}
-      </section>
+        <section className="languages-list">
+          {languageElements}
+        </section>
 
-      <section className="word">
-        {letterElements}
-      </section>
+        <section className="word">
+          {letterElements}
+        </section>
 
-      <section className="keyboard">
-        {keyboardElements}
-      </section>
+        <section className="keyboard">
+          {keyboardElements}
+        </section>
 
-      {isGameOver && <button className="new-game">New Game</button>}
-    </main>
+        {isGameOver && <button className="new-game">New Game</button>}
+      </main >
+    </>
   )
 }
 
