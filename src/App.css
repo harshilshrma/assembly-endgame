@@ -40,13 +40,13 @@ header>p {
   text-align: center;
 }
 
-.gameStatus>h3 {
+.main-message {
   font-size: 1.25rem;
   font-weight: 500;
   margin: 1px;
 }
 
-.gameStatus>p {
+.sub-message {
   font-size: 1rem;
   font-weight: 500;
   margin: 1px;
@@ -58,6 +58,16 @@ header>p {
 
 .gameStatus.lost {
   background-color: #BA2A2A;
+}
+
+.farewellMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7A5EA7;
+  border: 1px dashed #323232;
+  font-style: italic;
+  font-weight: 400;
 }
 
 .languages-list {
@@ -131,6 +141,11 @@ header>p {
   cursor: pointer;
   background-color: #FCBA29;
   color: black;
+}
+
+.keyboard>button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 button.correct {

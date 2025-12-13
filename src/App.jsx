@@ -3,10 +3,11 @@ import { clsx } from 'clsx'
 import './App.css'
 import languages from './languages.js'
 import Confetti from 'react-confetti'
+import { words } from './words.js'
 
 function App() {
   // State values
-  const [currentWord, setCurrentWord] = useState('harshil')
+  const [currentWord, setCurrentWord] = useState(() => getRandomWord())
   const [guessedLetters, setGuessedLetters] = useState([])
 
   // Derived values
@@ -14,12 +15,15 @@ function App() {
   const isGameWon = currentWord.split("").every(letter => guessedLetters.includes(letter))
   const isGameLost = languages.length - wrongGuessCount <= 1
   const isGameOver = isGameWon || isGameLost
+  const lastGuessLetter = guessedLetters[guessedLetters.length - 1]
+  const isLastGuessIncorrect = lastGuessLetter && !currentWord.includes(lastGuessLetter)
 
   // Static values
   const alphabets = "qwertyuiopasdfghjklzxcvbnm"
 
   const languageElements = languages.map((lang, index) => {
     const isLanguageLost = index < wrongGuessCount;
+
     const spanStyles = {
       backgroundColor: lang.backgroundColor,
       color: lang.color
@@ -53,7 +57,7 @@ function App() {
     })
 
     return (
-      <button key={letter} className={className} onClick={() => handleLetterClick(letter)}>{letter.toUpperCase()}</button>
+      <button disabled={isGameOver} key={letter} className={className} onClick={() => handleLetterClick(letter)}>{letter.toUpperCase()}</button>
     )
   })
 
@@ -66,19 +70,24 @@ function App() {
   const gameStatusClass = clsx({
     gameStatus: true,
     won: isGameWon,
-    lost: isGameLost
+    lost: isGameLost,
+    farewellMessage: !isGameOver && isLastGuessIncorrect
   })
 
   function renderGameStatus() {
-    if (!isGameOver) {
-      return null;
+    if (!isGameOver && isLastGuessIncorrect) {
+      return (
+        <>
+          <p className="farewell-message">{getFarewellText(languages[wrongGuessCount - 1].name)}</p>
+        </>
+      )
     }
 
     if (isGameWon) {
       return (
         <>
-          <h3>You won!</h3>
-          <p>Well done! 🎉</p>
+          <h3 className="main-message">You won!</h3>
+          <p className="sub-message">Well done! 🎉</p>
         </>
       )
     }
@@ -86,11 +95,41 @@ function App() {
     if (isGameLost) {
       return (
         <>
-          <h3>Game over!</h3>
-          <p>You lose! Better start learning Assembly 😭</p>
+          <h3 className="main-message">Game over! It was "{currentWord.toUpperCase()}"</h3>
+          <p className="sub-message">You lose! Better start learning Assembly 😭</p>
         </>
       )
     }
+  }
+
+  function getFarewellText(language) {
+    const options = [
+      `Farewell, ${language}`,
+      `Adios, ${language}`,
+      `R.I.P., ${language}`,
+      `We'll miss you, ${language}`,
+      `Oh no, not ${language}!`,
+      `${language} bites the dust`,
+      `Gone but not forgotten, ${language}`,
+      `The end of ${language} as we know it`,
+      `Off into the sunset, ${language}`,
+      `${language}, it's been real`,
+      `${language}, your watch has ended`,
+      `${language} has left the building`
+    ];
+
+    const randomIndex = Math.floor(Math.random() * options.length);
+    return options[randomIndex];
+  }
+
+  function getRandomWord() {
+    const randIdx = Math.floor(Math.random() * words.length)
+    return words[randIdx]
+  }
+
+  function handleNewGame() {
+    setCurrentWord(getRandomWord())
+    setGuessedLetters([])
   }
 
   return (
@@ -118,7 +157,7 @@ function App() {
           {keyboardElements}
         </section>
 
-        {isGameOver && <button className="new-game">New Game</button>}
+        {isGameOver && <button onClick={handleNewGame} className="new-game">New Game</button>}
       </main >
     </>
   )
