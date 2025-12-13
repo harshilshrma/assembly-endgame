@@ -10,18 +10,27 @@ function App() {
 
   // Derived values
   const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
+  const isGameWon = currentWord.split("").every(letter => guessedLetters.includes(letter))
+  const isGameLost = languages.length - wrongGuessCount <= 1
+  const isGameOver = isGameWon || isGameLost
 
   // Static values
   const alphabets = "qwertyuiopasdfghjklzxcvbnm"
 
-  const languageElements = languages.map(lang => {
+  const languageElements = languages.map((lang, index) => {
+    const isLanguageLost = index < wrongGuessCount;
     const spanStyles = {
       backgroundColor: lang.backgroundColor,
       color: lang.color
     };
 
+    const className = clsx({
+      langTag: true,
+      lost: isLanguageLost
+    })
+
     return (
-      <span key={lang.name} style={spanStyles} className="lang-tag">{lang.name}</span>
+      <span key={lang.name} style={spanStyles} className={className}>{lang.name}</span>
     )
   })
 
@@ -77,7 +86,7 @@ function App() {
         {keyboardElements}
       </section>
 
-      <button className="new-game">New Game</button>
+      {isGameOver && <button className="new-game">New Game</button>}
     </main>
   )
 }
