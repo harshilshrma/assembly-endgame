@@ -40,8 +40,11 @@ function App() {
   })
 
   const letterElements = currentWord.split("").map((letter, index) => {
+    const shouldRevealLetter = isGameLost || guessedLetters.includes(letter)
+    const letterClassName = clsx("letter", isGameLost && !guessedLetters.includes(letter) && "missed-letter")
+
     return (
-      <span key={index} className="letter">{guessedLetters.includes(letter) ? letter.toUpperCase() : ""}</span>
+      <span key={index} className={letterClassName}>{shouldRevealLetter ? letter.toUpperCase() : ""}</span>
     )
   });
 
@@ -57,7 +60,9 @@ function App() {
     })
 
     return (
-      <button disabled={isGameOver} key={letter} className={className} onClick={() => handleLetterClick(letter)}>{letter.toUpperCase()}</button>
+      <button disabled={isGameOver} key={letter} className={className} onClick={() => handleLetterClick(letter)}>
+        {letter.toUpperCase()}
+      </button>
     )
   })
 
@@ -95,7 +100,7 @@ function App() {
     if (isGameLost) {
       return (
         <>
-          <h3 className="main-message">Game over! It was "{currentWord.toUpperCase()}"</h3>
+          <h3 className="main-message">Game over!</h3>
           <p className="sub-message">You lose! Better start learning Assembly 😭</p>
         </>
       )
